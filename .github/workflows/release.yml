@@ -19,9 +19,13 @@ jobs:
       - name: Validate Python scripts
         run: |
           python3 -m py_compile \
+            scripts/manifests.py \
             scripts/package_claude_plugin.py \
             scripts/validate_claude_plugin_package.py \
             skills/legalize-kr/scripts/select_access_mode.py
+
+      - name: Check harness manifests are generated from plugin.source.json
+        run: python3 scripts/manifests.py check
 
       - name: Build Claude Cowork plugin ZIP
         run: |
