@@ -5,7 +5,6 @@ commit 7d933f6 fixed a marketplace entry that duplicated plugin.json components.
 """
 
 import json
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -16,9 +15,9 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import manifests  # noqa: E402
 
-
-def git_show(ref_path: str) -> str:
-    return subprocess.check_output(["git", "show", ref_path], cwd=ROOT, text=True)
+# The marketplace file as committed before 7d933f6, kept as a fixture so the
+# test does not depend on git history (CI checks out with depth 1).
+BUGGY_MARKETPLACE = ROOT / "tests/fixtures/marketplace_before_7d933f6.json"
 
 
 class GeneratedManifestsTest(unittest.TestCase):
@@ -59,7 +58,7 @@ class GeneratedManifestsTest(unittest.TestCase):
             )
             manifests.generate(root)
             buggy = root / ".claude-plugin/marketplace.json"
-            buggy.write_text(git_show("7d933f6~1:.claude-plugin/marketplace.json"), encoding="utf-8")
+            buggy.write_text(BUGGY_MARKETPLACE.read_text(encoding="utf-8"), encoding="utf-8")
             self.assertIn(".claude-plugin/marketplace.json", manifests.drifted(root))
 
     def test_every_manifest_agrees_on_name_version_and_license(self) -> None:
