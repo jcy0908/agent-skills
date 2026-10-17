@@ -380,7 +380,11 @@ git push origin v0.1.0
 
 ## 저장소 구조
 
+하네스별 manifest는 `plugin.source.json`에서 생성됩니다. 메타데이터를 바꿀 때는 `plugin.source.json`만 수정하고 `python3 scripts/manifests.py generate`를 실행하세요. 생성된 파일을 직접 고치면 CI의 `manifests.py check`가 실패합니다. 기여 규칙은 [AGENTS.md](./AGENTS.md)에 있습니다.
+
 ```text
+AGENTS.md
+plugin.source.json
 .claude-plugin/
   marketplace.json
   plugin.json
@@ -390,12 +394,15 @@ git push origin v0.1.0
   marketplace.json
 .github/workflows/
   release.yml
+  validate.yml
 .mcp.json
 gemini-extension.json
 plugin.json
 scripts/
+  manifests.py
   package_claude_plugin.py
   validate_claude_plugin_package.py
+tests/
 skills/
   legalize-kr/
     SKILL.md
