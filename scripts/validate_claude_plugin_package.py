@@ -5,15 +5,18 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import zipfile
-from pathlib import PurePosixPath
+from pathlib import Path, PurePosixPath
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from package_claude_plugin import DEFAULT_INCLUDES  # noqa: E402
+
+# Derived from the packager's include list so the two can't disagree.
 REQUIRED_FILES = {
-    ".claude-plugin/plugin.json",
-    ".mcp.json",
-    "skills/legalize-kr/SKILL.md",
-    "README.md",
+    "skills/legalize-kr/SKILL.md" if include == "skills" else include
+    for include in DEFAULT_INCLUDES
 }
 
 
