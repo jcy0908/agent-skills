@@ -1,8 +1,10 @@
 {
   "name": "legalize-kr",
-  "description": "Use Legalize-KR public Korean legal datasets, including laws, court precedents, administrative rules, and local ordinances.",
+  "version": "0.1.0",
+  "description": "Legalize-KR MCP and Skills integration for Korean laws, court precedents, administrative rules, and local ordinances.",
   "author": {
-    "name": "Junghwan Park"
+    "name": "Junghwan Park",
+    "url": "https://github.com/legalize-kr"
   },
   "homepage": "https://legalize.kr",
   "repository": "https://github.com/legalize-kr/agent-skills",
@@ -13,7 +15,8 @@
     "laws",
     "precedents",
     "administrative-rules",
-    "ordinances"
+    "ordinances",
+    "mcp"
   ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json"
